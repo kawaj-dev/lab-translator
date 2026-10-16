@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="160" viewBox="0 0 720 160" role="img" aria-labelledby="title">
+  <title id="title">L+ LabTranslator</title>
+  <rect width="720" height="160" rx="8" fill="#14263F"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="49" font-weight="700">
+    <text x="40" y="102" fill="#FFFFFF">L</text>
+    <text x="69" y="102" fill="#38A5D6">+</text>
+    <text x="111" y="102" fill="#FFFFFF">LabTranslator</text>
+  </g>
+</svg>

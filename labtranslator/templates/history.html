@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h1>変更履歴</h1>{% for r in records %}<details><summary>{{ r.changed_at }} · {{ r.target_table }} #{{ r.target_id }} · {{ r.action }} · {{ r.changed_by }}</summary><h2>変更前</h2><pre>{{ r.before_data }}</pre><h2>変更後</h2><pre>{{ r.after_data }}</pre></details>{% endfor %}{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block content %}
+<p class="eyebrow">03 / EXPORT</p><h1>翻訳結果を出力</h1><p>{{ job.filename }}</p>
+<div class="review-summary"><span>出力項目 <strong>{{ summary.total }}</strong></span><span>未登録・要確認 <strong id="output-review-count">{{ summary.review }}</strong></span><span>重大な警告 <strong>{{ summary.critical }}</strong></span></div>
+{% if summary.metadata_review %}<p class="notice">上部情報に要確認項目が {{ summary.metadata_review }} 件あります。未確定の英訳は空欄で出力します。</p>{% endif %}
+{% if summary.manual_pending %}<section class="manual-output-warning"><h2>未確認の手動英訳：{{ summary.manual_pending|length }}件</h2><p>保存済みの手動英訳は、英訳または原資料の確認が完了していないため、PDF・Excelでは空欄になります。修正内容は保持されています。</p><ul>{% for item in summary.manual_pending %}<li><a href="{{ url_for('edit_item',job_id=job_id,index=item.index) }}">{{ item.index+1 }}行目：{{ item.name }}</a> — {{ item.reason }}</li>{% endfor %}</ul></section>{% endif %}
+<section class="output-card"><h2>出力形式を選択</h2>{% if summary.blank %}<p class="notice">英訳が空欄になる項目が {{ summary.blank }} 件あります。未登録・要確認の英訳は推測で補完しません。手動英訳は確認が完了したものを出力します。</p>{% endif %}{% if summary.critical %}<p class="notice">重大な警告が残っています。出力前に原資料と照合してください。</p>{% endif %}{% if not summary.total %}<p class="notice">出力対象の検査項目がありません。</p>{% endif %}
+<div class="format-options"><div><h3>PDF</h3><p>英訳報告書の項目・検査値・単位・状態を帳票にします。</p><a class="button" href="{{ url_for('download',job_id=job_id,extension='pdf') }}">PDFをダウンロード</a></div><div><h3>Excel</h3><p>英訳・原文・検査値・単位・照合状態を含むデータです。検査値・単位は文字列セルで保持します。</p><a class="button" href="{{ url_for('download',job_id=job_id,extension='xlsx') }}">Excelをダウンロード</a></div></div><p>プレビューと同じ照合結果を使用します。除外した行は出力しません。</p><a href="{{ url_for('results',job_id=job_id) }}">← 比較プレビューへ戻る</a></section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% block content %}
+<div class="upload-page"><h1>ファイルをアップロード</h1><p class="upload-description">英訳する検査結果報告書を選択してください。</p>
+<form method="post" enctype="multipart/form-data" id="upload-form"><input type="hidden" name="csrf" value="{{ csrf }}">
+<div id="drop-zone" class="upload-drop-zone" aria-label="PDFファイルのドロップ領域">
+<svg class="upload-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M16 41a13 13 0 1 1 25-17 10 10 0 0 1 8 18M32 53V30m-10 10 10-10 10 10" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<p class="drop-title">ここにファイルをドラッグ＆ドロップ</p><p class="drop-or">または</p>
+<input type="file" name="file" id="upload-file" accept=".pdf,application/pdf" required aria-label="PDFファイルを選択" aria-describedby="upload-formats upload-status">
+<button type="button" id="choose-file" hidden>ファイルを選択</button><noscript><p>PDFを選択してアップロードしてください。</p><button type="submit">アップロード</button></noscript>
+</div><p id="upload-formats" class="upload-formats">アップロード可能な形式：PDF（第1版）</p><p class="muted">20 MB以内・20ページ以内。暗号化されたPDFは受け付けません。</p><p id="upload-status" role="status" aria-live="polite"></p></form>
+<section class="demo-section"><h2>デモを試す</h2><p>架空の検査結果を読み込み、原文と英訳を比較します。</p><form method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><label>帳票<select name="demo"><option>A</option><option>B</option><option>C</option></select></label><button>デモを読み込む</button></form></section></div>
+<script src="{{ url_for('static',filename='upload.js') }}" defer></script>
+{% endblock %}
